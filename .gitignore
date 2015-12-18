@@ -8,5 +8,5 @@ dependency-reduced-pom.xml
 buildNumber.properties
 *.iml
 *.log
-.idea/
+**/.idea
 
