@@ -8,9 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class CommonResponse<T> {
     @JsonProperty
-    private Integer code;
+    private Integer code = 0;
     @JsonProperty
-    private String msg;
+    private String msg = "";
     @JsonProperty
     private T data;
 

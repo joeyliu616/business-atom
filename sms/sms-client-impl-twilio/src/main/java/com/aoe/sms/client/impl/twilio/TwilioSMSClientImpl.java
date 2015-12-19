@@ -70,4 +70,9 @@ public class TwilioSMSClientImpl implements SMSClient {
         }
 
     }
+
+    @Override
+    public String getSender() {
+        return "twilio";
+    }
 }

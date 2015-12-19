@@ -30,6 +30,12 @@ public class SMS{
     private Boolean isReceived;
 
     @Column
+    private String sender;
+
+    @Column
+    private Boolean isSent;
+
+    @Column
     @CreationTimestamp
     private Date createTime;
 
@@ -92,5 +98,21 @@ public class SMS{
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public Boolean isSent() {
+        return isSent;
+    }
+
+    public void setIsSent(Boolean isSent) {
+        this.isSent = isSent;
     }
 }
