@@ -12,7 +12,8 @@ public abstract class ServiceLauncherTemplate {
 
     @Bean
     ObjectMapper objectMapper(){return new ObjectMapper();}
-    public static void startService(Class Launcher,String... args){
+
+    public static void startService(Class Launcher,String[] args){
         SpringApplication springApplication = new SpringApplication(Launcher);
         springApplication.addListeners(new ApplicationPidFileWriter());
         springApplication.run(args);

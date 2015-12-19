@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {TwilioSMSConfigHook.class})
-public class TestSms {
+public class SmsTest {
 
     @Resource
     TwilioSMSClientImpl twilioSMSClient;
@@ -23,6 +23,7 @@ public class TestSms {
     @Test
     public void foo(){
         Assert.notNull(twilioSMSClient);
+        twilioSMSClient.send("18566231281","hello joey");
     }
 
 }
