@@ -7,34 +7,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 通用Dto
  */
 public class CommonResponse<T> {
+
     @JsonProperty
-    private Integer code = 0;
-    @JsonProperty
-    private String msg = "";
+    CommonResult result;
+
     @JsonProperty
     private T data;
 
-    public Integer getCode() {
-        return code;
+
+    public CommonResult getResult() {
+        return result;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
+    //hack.
+    public CommonResponse<T> setResult(CommonResult result) {
+        this.result = result;
+        return this;
     }
 
     public T getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public CommonResponse<T> setData(T data) {
         this.data = data;
+        return this;
     }
 }
