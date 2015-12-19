@@ -1,5 +1,6 @@
 package com.aoe.sms.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.Date;
 public class SMSInfo {
 
     //短信内容. 不带签名.
-    @JsonProperty
+    @JsonIgnore
     private String content;
 
     //手机号
@@ -25,7 +26,7 @@ public class SMSInfo {
     @JsonProperty("send_time")
     private Date sendTime;
 
-    //用户是否已经收到
+    //用户是否已经收到, null 未知
     @JsonProperty("is_received")
     private Boolean isReceived;
 

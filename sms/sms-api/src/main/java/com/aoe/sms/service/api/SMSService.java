@@ -1,6 +1,7 @@
 package com.aoe.sms.service.api;
 
 import com.aoe.base.dto.CommonResponse;
+import com.aoe.sms.dto.MatchResult;
 import com.aoe.sms.dto.SMSInfo;
 
 /**
@@ -10,10 +11,18 @@ public interface SMSService {
     /**
      * 向指定手机发送短信验证码
      * @param mobileNo
-     * @param content
      * @return
      */
-    CommonResponse<SMSInfo> send(String mobileNo, String content);
+    CommonResponse<SMSInfo> getSMSCode(String mobileNo,String template);
+
+
+    /**
+     * 校验短信内容
+     * @param uuid
+     * @param code
+     * @return
+     */
+    CommonResponse<MatchResult> verifySms(String uuid,String code);
 
 
     /**
