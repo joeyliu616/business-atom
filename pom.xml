@@ -20,6 +20,7 @@
         <module>sms</module>
         <module>base</module>
         <module>service-common</module>
+        <module>base-integration-rest</module>
     </modules>
 
 
