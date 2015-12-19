@@ -43,7 +43,7 @@ public class EmayClient {
      * 软件序列号注册、或者说是激活、软件序列号首次使用必须激活
      * 
      * @param password 软件序列号密码、密码长度为6位的数字字符串、软件序列号和密码请通过亿美销售人员获取
-     * @return resultInfo(code:0) 表示成功，其余表示失败
+     * @return resultInfo(code,0) 表示成功，其余表示失败
      */
     public ResultInfo registEx(String password) {
         ResultInfo resultInfo = new ResultInfo();
@@ -82,7 +82,7 @@ public class EmayClient {
      * 注册企业信息
      * 
      * @param infos 包含企业注册的各项信息，数组长度为8
-     * @return resultInfo(code:0) 表示成功，其余表示失败
+     * @return resultInfo(code,0) 表示成功，其余表示失败
      */
     public ResultInfo registDetailInfo(List<String> infos) {
         ResultInfo resultInfo = new ResultInfo();
@@ -97,7 +97,7 @@ public class EmayClient {
             resultInfo.setCode("1");
             resultInfo.setMessage("信息数组长度必须为8");
             logger.info("spId:{} registDetailInfo resultInfo:{}",
-                    new Object[] { softwareSerialNo, resultInfo });
+                    new Object[]{softwareSerialNo, resultInfo});
             return resultInfo;
         }
         int result = getClient().registDetailInfo(infos.get(0), infos.get(1), infos.get(2),
@@ -135,7 +135,7 @@ public class EmayClient {
     /**
      * 软件注销 1、软件注销后像发送短信、接受上行短信接口都无法使用 2、软件可以重新注册、注册完成后软件序列号的金额保持注销前的状态
      * 
-     * @return resultInfo(code:0) 表示成功，其余表示失败
+     * @return resultInfo(code,0) 表示成功，其余表示失败
      */
     public ResultInfo logout() {
         ResultInfo resultInfo = new ResultInfo();
@@ -181,7 +181,7 @@ public class EmayClient {
             logger.info("spId:{} getEachFee failed,because client=null", softwareSerialNo);
             return -1.0;
         }
-        double fee = 0.0;
+        double fee;
         fee = getClient().getEachFee();
         logger.info("spId:{} getEachFee result:{}", new Object[] { softwareSerialNo, fee });
         return fee;
@@ -191,7 +191,7 @@ public class EmayClient {
      * 获取账号的余额,如果失败，返回-1.0
      */
     public double getBalance() {
-        double balance = 0.0;
+        double balance;
         if (getClient() == null) {
             logger.info("spId:{} getBalance failed,because client=null", softwareSerialNo);
             return -1.0;
@@ -211,7 +211,7 @@ public class EmayClient {
      * 
      * @param cardNo 充值卡号
      * @param cardPass 充值卡密码
-     * @return
+     * @return ResultInfo
      */
     public ResultInfo chargeUp(String cardNo, String cardPass) {
         ResultInfo resultInfo = new ResultInfo();
@@ -219,12 +219,12 @@ public class EmayClient {
             resultInfo.setCode("1");
             resultInfo.setMessage("client=null");
             logger.info("spId:{} chargeUp with cardNo:{},cardPass:{} failed,resultInfo:{}",
-                    new Object[] { softwareSerialNo, cardNo, cardPass, resultInfo });
+                    softwareSerialNo, cardNo, cardPass, resultInfo );
             return resultInfo;
         }
         int result = getClient().chargeUp(cardNo, cardPass);
         logger.info("spId:{} chargeUp with cardNo:{},cardPass:{} result:{}",
-                new Object[] { softwareSerialNo, cardNo, cardPass, result });
+                 softwareSerialNo, cardNo, cardPass, result );
         if (result == 0) {
             resultInfo.setCode("0");
             resultInfo.setMessage("充值成功");
@@ -279,15 +279,15 @@ public class EmayClient {
             resultInfo.setCode("1");
             resultInfo.setMessage("client=null");
             logger.info("spId:{} sendSMS mobiles:{},content:{} failed resultInfo:{}",
-                    new Object[] { softwareSerialNo,
+                    softwareSerialNo,
                             mobiles == null ? "null" : Arrays.toString(mobiles), content,
-                            resultInfo });
+                            resultInfo );
             return resultInfo;
         }
         int result = getClient().sendSMS(mobiles, content, addSerial, smsPriority);
         logger.info("spId:{} sendSMS mobiles:{},content:{} result:{}",
-                new Object[] { softwareSerialNo,
-                        mobiles == null ? "null" : Arrays.toString(mobiles), content, result });
+                softwareSerialNo,
+                        mobiles == null ? "null" : Arrays.toString(mobiles), content, result );
         if (result == 0) {
             resultInfo.setCode("0");
             resultInfo.setMessage("短信发送成功");
@@ -325,7 +325,7 @@ public class EmayClient {
      *            请客户应用程序不要自己分割短信以免造成混乱)
      * @param sendTime 定时时间.格式为：年年年年月月日日时时分分秒秒
      * @param addSerial 扩展号 (长度小于15的字符串) 用户可通过扩展号自定义短信类别
-     * @return
+     * @return ResultInfo
      */
     public ResultInfo sendScheduledSMS(String[] mobiles, String smsContent, String sendTime,
                                        String addSerial) {
@@ -334,16 +334,16 @@ public class EmayClient {
             resultInfo.setCode("1");
             resultInfo.setMessage("client=null");
             logger.info("spId:{} sendScheduledSMS mobiles:{},content:{},sendTime:{} resultInfo:{}",
-                    new Object[] { softwareSerialNo,
+                    softwareSerialNo,
                             mobiles == null ? "null" : Arrays.toString(mobiles), smsContent,
-                            sendTime, resultInfo });
+                            sendTime, resultInfo );
             return resultInfo;
         }
         int result = getClient().sendScheduledSMS(mobiles, smsContent, sendTime);
         logger.info("spId:{} sendScheduledSMS mobiles:{},content:{},sendTime:{} result:{}",
-                new Object[] { softwareSerialNo,
+                softwareSerialNo,
                         mobiles == null ? "null" : Arrays.toString(mobiles), smsContent, sendTime,
-                        result });
+                        result );
         if (result == 0) {
             resultInfo.setCode("0");
             resultInfo.setMessage("短信发送成功");
@@ -390,16 +390,16 @@ public class EmayClient {
             resultInfo.setCode("1");
             resultInfo.setMessage("client=null");
             logger.info("spId:{} sendSMSAddMessageId mobiles:{},content:{} resultInfo:{}",
-                    new Object[] { softwareSerialNo,
+                    softwareSerialNo,
                             mobiles == null ? "null" : Arrays.toString(mobiles), smsContent,
-                            resultInfo });
+                            resultInfo );
             return resultInfo;
         }
         int result = getClient().sendSMSEx(mobiles, smsContent, addSerial, srcCharset, smsPriority,
                 smsID);
         logger.info("spId:{} sendSMSAddMessageId mobiles:{},content:{} result:{}",
-                new Object[] { softwareSerialNo,
-                        mobiles == null ? "null" : Arrays.toString(mobiles), smsContent, result });
+                softwareSerialNo,
+                        mobiles == null ? "null" : Arrays.toString(mobiles), smsContent, result);
         if (result == 0) {
             resultInfo.setCode("0");
             resultInfo.setMessage("短信发送成功");
@@ -437,7 +437,7 @@ public class EmayClient {
      * @return 返回size为零或者不为零的list（list不可能=null）
      */
     public List<MO> getMO() {
-        List<MO> resultList = new ArrayList<MO>();
+        List<MO> resultList = new ArrayList<>();
         if (getClient() == null) {
             logger.info("spId:{} getMO failed:client=null", new Object[] { softwareSerialNo });
             return resultList;
@@ -446,9 +446,9 @@ public class EmayClient {
             resultList = getClient().getMO();
             if (resultList != null) {
                 logger.info("spId getMo with list size:",
-                        new Object[] { softwareSerialNo, resultList.size() });
+                        softwareSerialNo, resultList.size() );
             } else {
-                resultList = new ArrayList<MO>();
+                resultList = new ArrayList<>();
             }
         } catch (Exception e) {
             logger.error("", e);
@@ -462,7 +462,7 @@ public class EmayClient {
      * @return 返回size为零或者不为零的list（list不可能=null）
      */
     public List<StatusReport> getStatusReport() {
-        List<StatusReport> resultList = new ArrayList<StatusReport>();
+        List<StatusReport> resultList = new ArrayList<>();
         if (getClient() == null) {
             logger.info("spId:{} getStatusReport failed:client=null",
                     new Object[] { softwareSerialNo });
@@ -473,7 +473,7 @@ public class EmayClient {
             if (resultList != null) {
                 logger.info("list size:" + resultList.size());
             } else {
-                resultList = new ArrayList<StatusReport>();
+                resultList = new ArrayList<>();
             }
         } catch (Exception e) {
             logger.error("", e);
@@ -491,7 +491,7 @@ public class EmayClient {
     public int modifySerialPwdUpd(String oldPwd, String newPwd) {
         if (getClient() == null) {
             logger.info("spId:{} modifySerialPwdUpd failed:client=null",
-                    new Object[] { softwareSerialNo });
+                    softwareSerialNo);
             return -99;
         }
         try {
