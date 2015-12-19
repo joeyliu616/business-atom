@@ -15,6 +15,7 @@
         <module>sms-service</module>
         <module>sms-client-api</module>
         <module>sms-client-impl-twilio</module>
+        <module>sms-client-impl-emay</module>
     </modules>
 
     
