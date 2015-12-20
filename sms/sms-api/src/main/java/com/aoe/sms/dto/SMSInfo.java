@@ -57,20 +57,20 @@ public class SMSInfo {
         this.SMSId = SMSId;
     }
 
-    public Boolean isReceived() {
-        return isReceived;
-    }
-
-    public void setIsReceived(Boolean isReceived) {
-        this.isReceived = isReceived;
-    }
-
     public Date getSendTime() {
         return sendTime;
     }
 
     public void setSendTime(Date sendTime) {
         this.sendTime = sendTime;
+    }
+
+    public Boolean isReceived() {
+        return isReceived;
+    }
+
+    public void setIsReceived(Boolean isReceived) {
+        this.isReceived = isReceived;
     }
 
     public Date getExpireAfter() {

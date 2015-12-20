@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +33,7 @@ public class SMSServiceImpl implements SMSService {
     RedisTemplate<String,String> redisTemplate;
 
 
-    @Value("${sms.expire")
+    @Value("${sms.expire}")
     int expire;
 
     @Resource
@@ -88,6 +89,8 @@ public class SMSServiceImpl implements SMSService {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE,expire);
         info.setExpireAfter(calendar.getTime());
+        info.setMobileNo(mobileNo);
+        info.setSendTime(new Date());
         response.setData(info);
 
         redisTemplate.opsForValue().set(smsId,code,expire,TimeUnit.MINUTES);

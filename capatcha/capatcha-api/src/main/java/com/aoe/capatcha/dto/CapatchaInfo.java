@@ -19,13 +19,11 @@ public class CapatchaInfo implements Serializable {
     @JsonProperty("expire_after")
     private Date expireAfter;
 
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
+    public CapatchaInfo(byte[] image, String uuid) {
+        this.image = image;
         this.uuid = uuid;
     }
+
 
     public byte[] getImage() {
         return image;
@@ -35,8 +33,11 @@ public class CapatchaInfo implements Serializable {
         this.image = image;
     }
 
-    public CapatchaInfo(byte[] image, String uuid) {
-        this.image = image;
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
