@@ -10,6 +10,7 @@ public interface URLConstants {
     interface SMS{
         String prefix = "/sms";
         String REGISTER_CODE = "/register_code";
+        String VERIFY_CODE = "/verify_code";
     }
 
 }
