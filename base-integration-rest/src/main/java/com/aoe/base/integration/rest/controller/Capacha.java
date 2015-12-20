@@ -31,9 +31,8 @@ public class Capacha {
         return capatchaService.createCapatcha(OrderNoUtil.uuid(), ServerConstants.Name);
     }
 
-    @RequestMapping(value= "/demo/captcha/captcha_image",method = RequestMethod.POST,produces = "image/png")
+    @RequestMapping(value= "/demo/captcha/captcha_image",method = RequestMethod.POST)
     public void getCaptchaImage(HttpServletResponse response) throws IOException {
-
         CommonResponse<CapatchaInfo> capatcha = capatchaService.createCapatcha(OrderNoUtil.uuid(), ServerConstants.Name);
         if(null != capatcha && null != capatcha.getData()){
             CapatchaInfo info = capatcha.getData();

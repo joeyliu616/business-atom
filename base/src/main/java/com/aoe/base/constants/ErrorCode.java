@@ -15,6 +15,8 @@ public class ErrorCode {
 
     public final static Integer Capatcha_Start = num.getAndIncrement() * step;
 
+    public final static Integer Mail_Start = num.getAndIncrement() * step;
+
 
 
 }

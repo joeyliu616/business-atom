@@ -30,6 +30,7 @@
         <module>service-common</module>
         <module>base-integration-rest</module>
         <module>capatcha</module>
+        <module>mail</module>
     </modules>
 
 

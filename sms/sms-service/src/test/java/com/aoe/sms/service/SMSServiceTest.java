@@ -1,9 +1,12 @@
 package com.aoe.sms.service;
 
 import com.aoe.base.dto.CommonResponse;
+import com.aoe.base.util.OrderNoUtil;
 import com.aoe.sms.SMSServiceLauncher;
 import com.aoe.sms.constants.SMS_ERROR_MSG;
 import com.aoe.sms.dto.SMSInfo;
+import com.aoe.sms.entity.SMS;
+import com.aoe.sms.repository.SMSRepository;
 import com.aoe.sms.service.api.SMSService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,6 +28,9 @@ public class SMSServiceTest {
 
     @Resource
     SMSService smsService;
+
+    @Resource
+    SMSRepository smsRepository;
 
     @Resource
     ObjectMapper objectMapper;
@@ -55,5 +61,21 @@ public class SMSServiceTest {
     @Test
     public void testVerifyCode(){
         Assert.isTrue(smsService.verifySms("e9598d06e9ab45c1b328ed9e8b752b07","3675").getData().isMatch());
+    }
+
+    @Test
+    public void testRepo(){
+        SMS sms = new SMS();
+        sms.setIsSent(true);
+        sms.setIsReceived(true);
+        sms.setUuid(OrderNoUtil.uuid());
+        sms.setContent("中文");
+        sms.setBizNo(OrderNoUtil.uuid());
+        sms.setFirstParty("joy");
+        sms.setMobile("18566231281");
+        sms.setSp("sp");
+
+        SMS save = smsRepository.save(sms);
+        Assert.notNull(save);
     }
 }
