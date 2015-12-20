@@ -29,7 +29,7 @@
         <module>base</module>
         <module>service-common</module>
         <module>base-integration-rest</module>
-        <module>captcha</module>
+        <module>capatcha</module>
     </modules>
 
 
