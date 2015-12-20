@@ -8,12 +8,16 @@ import com.aoe.sms.dto.SMSInfo;
  * Created by joey on 15-12-18.
  */
 public interface SMSService {
+
     /**
      * 向指定手机发送短信验证码
      * @param mobileNo
+     * @param template
+     * @param bizNo 调用方的订单号.
+     * @param consumerName 调用方名称
      * @return
      */
-    CommonResponse<SMSInfo> getSMSCode(String mobileNo,String template);
+    CommonResponse<SMSInfo> getSMSCode(String mobileNo, String template, String bizNo, String consumerName);
 
 
     /**

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CommonResponse<T> {
 
     @JsonProperty
-    CommonResult result;
+    CommonResult result = new CommonResult(0,"");
 
     @JsonProperty
     private T data;

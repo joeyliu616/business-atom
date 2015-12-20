@@ -10,15 +10,22 @@ import java.util.Date;
  * Created by joey on 15-12-18.
  */
 @Entity
-@Table(name="t_sms")
+@Table(name="t_sms",uniqueConstraints={
+    @UniqueConstraint(
+            columnNames = {"bizNo","firstParty"}
+    )
+})
 public class SMS{
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false,unique = true)
-    private String SMSId;
+    @Column(nullable = false, unique = true)
+    private String uuid;
+
+    @Column(nullable = false)
+    private String bizNo;
 
     @Column(nullable = false)
     private String mobile;
@@ -29,8 +36,13 @@ public class SMS{
     @Column
     private Boolean isReceived;
 
-    @Column
-    private String sender;
+    //短信发送服务提供商.
+    @Column(nullable = false)
+    private String sp;
+
+    //甲方. 短信发送的请求方
+    @Column(nullable = false)
+    private String firstParty;
 
     @Column
     private Boolean isSent;
@@ -42,7 +54,6 @@ public class SMS{
     @Column
     @UpdateTimestamp
     private Date updateTime;
-
 
     public String getMobile() {
         return mobile;
@@ -68,12 +79,12 @@ public class SMS{
         this.id = id;
     }
 
-    public String getSMSId() {
-        return SMSId;
+    public String getBizNo() {
+        return bizNo;
     }
 
-    public void setSMSId(String SMSId) {
-        this.SMSId = SMSId;
+    public void setBizNo(String bizNo) {
+        this.bizNo = bizNo;
     }
 
     public Date getCreateTime() {
@@ -100,12 +111,12 @@ public class SMS{
         this.content = content;
     }
 
-    public String getSender() {
-        return sender;
+    public String getSp() {
+        return sp;
     }
 
-    public void setSender(String sender) {
-        this.sender = sender;
+    public void setSp(String sp) {
+        this.sp = sp;
     }
 
     public Boolean isSent() {
@@ -114,5 +125,21 @@ public class SMS{
 
     public void setIsSent(Boolean isSent) {
         this.isSent = isSent;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getFirstParty() {
+        return firstParty;
+    }
+
+    public void setFirstParty(String firstParty) {
+        this.firstParty = firstParty;
     }
 }

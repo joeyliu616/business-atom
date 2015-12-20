@@ -42,7 +42,7 @@ public class EmaySMSClientImpl implements SMSClient {
     }
 
     @Override
-    public String getSender() {
-        return "twilio";
+    public String getSP() {
+        return "emay";
     }
 }

@@ -39,7 +39,7 @@ public class SMSServiceImpl implements SMSService {
     }
 
     @Override
-    public CommonResponse<SMSInfo> getSMSCode(String mobileNo, String template) {
+    public CommonResponse<SMSInfo> getSMSCode(String mobileNo, String template, String bizNo, String consumer) {
         CommonResponse<SMSInfo> response = new CommonResponse();
 
         if(StringUtils.isEmpty(mobileNo)){
@@ -54,19 +54,24 @@ public class SMSServiceImpl implements SMSService {
         }
 
         Boolean sendResult = smsClient.send(mobileNo, content);
-
-        if(sendResult == false){
-            return response.setResult(SMS_ERROR_MSG.SEND_SMS_FAIL);
-        }
-
         SMS sms = new SMS();
         String smsId = UUID.randomUUID().toString().replaceAll("-", "");
         sms.setContent(content);
         sms.setMobile(mobileNo);
-        sms.setSender(smsClient.getSender());
+
+        sms.setSp(smsClient.getSP());
         sms.setIsSent(sendResult);
-        sms.setSMSId(smsId);
-        SMS save = smsRepository.save(sms);
+        sms.setUuid(smsId);
+        sms.setBizNo(bizNo);
+        sms.setFirstParty(consumer);
+
+        if(sendResult == false){
+            //标记为失败.
+            sms.setIsReceived(false);
+            smsRepository.save(sms);
+            return response.setResult(SMS_ERROR_MSG.SEND_SMS_FAIL);
+        }
+
 
         SMSInfo info = new SMSInfo();
         info.setSMSId(smsId);

@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SMSRepository extends JpaRepository<SMS,Long>{
-    SMS findBySMSId(String uuid);
+    SMS findByUuid(String uuid);
 }

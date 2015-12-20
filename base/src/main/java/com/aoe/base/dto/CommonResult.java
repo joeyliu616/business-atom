@@ -44,4 +44,5 @@ public class CommonResult {
         this.code = code;
         this.msg = msg;
     }
+
 }
