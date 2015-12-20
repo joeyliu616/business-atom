@@ -30,6 +30,9 @@ public class SMSInfo {
     @JsonProperty("is_received")
     private Boolean isReceived;
 
+    @JsonProperty("expire_after")
+    private Date expireAfter;
+
     public String getContent() {
         return content;
     }
@@ -60,5 +63,21 @@ public class SMSInfo {
 
     public void setIsReceived(Boolean isReceived) {
         this.isReceived = isReceived;
+    }
+
+    public Date getSendTime() {
+        return sendTime;
+    }
+
+    public void setSendTime(Date sendTime) {
+        this.sendTime = sendTime;
+    }
+
+    public Date getExpireAfter() {
+        return expireAfter;
+    }
+
+    public void setExpireAfter(Date expireAfter) {
+        this.expireAfter = expireAfter;
     }
 }

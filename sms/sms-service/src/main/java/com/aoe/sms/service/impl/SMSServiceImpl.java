@@ -9,10 +9,12 @@ import com.aoe.sms.entity.SMS;
 import com.aoe.sms.repository.SMSRepository;
 import com.aoe.sms.service.api.SMSService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Calendar;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -29,8 +31,14 @@ public class SMSServiceImpl implements SMSService {
     @Resource
     RedisTemplate<String,String> redisTemplate;
 
+
+    @Value("${sms.expire")
+    int expire;
+
     @Resource
     SMSClient smsClient;
+
+
 
     public String getCode(){
         int i = ThreadLocalRandom.current().nextInt(1000, 9999);
@@ -77,9 +85,12 @@ public class SMSServiceImpl implements SMSService {
         info.setSMSId(smsId);
         info.setContent(content);
         info.setSMSId(smsId);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MINUTE,expire);
+        info.setExpireAfter(calendar.getTime());
         response.setData(info);
 
-        redisTemplate.opsForValue().set(smsId,code,60, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(smsId,code,expire,TimeUnit.MINUTES);
 
         return response;
     }

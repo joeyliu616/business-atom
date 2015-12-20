@@ -54,7 +54,7 @@ public class CapatchaServiceImpl implements CapatchaService {
 
         CapatchaInfo capatchaInfo = new CapatchaInfo(imageToByte(bufferedImage),uuid);
         Calendar calendar = Calendar.getInstance();
-        calendar.add(expireTime,Calendar.MINUTE);
+        calendar.add(Calendar.MINUTE,expireTime);
         capatchaInfo.setExpireAfter(calendar.getTime());
         return response.setData(capatchaInfo);
 
