@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-APP=XX
+APP=capatcha-service
 JAR=$APP.jar
 FULLPATH=$(cd "$(dirname "$0")/../"; pwd)
 
