@@ -22,6 +22,12 @@ public class ZKConfig{
         return new CuratorFrameworkFactoryBean(zkUrl);
     }
 
+    /**
+     * 可以通过ZookeeperMetadataStore addListener 来获取变量变更的信息
+     * @param curatorFrameworkFactoryBean
+     * @return
+     * @throws Exception
+     */
     @Bean
     ZookeeperMetadataStore zookeeperMetadataStore(CuratorFrameworkFactoryBean curatorFrameworkFactoryBean) throws Exception {
         ZookeeperMetadataStore zookeeperMetadataStore = new ZookeeperMetadataStore(curatorFrameworkFactoryBean.getObject());
