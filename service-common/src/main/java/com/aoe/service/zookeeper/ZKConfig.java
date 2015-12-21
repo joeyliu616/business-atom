@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.integration.zookeeper.config.CuratorFrameworkFactoryBean;
+import org.springframework.integration.zookeeper.metadata.ZookeeperMetadataStore;
 
 /**
  * Created by joey on 15-12-21.
@@ -21,11 +23,10 @@ public class ZKConfig{
     }
 
     @Bean
-    ZookeeperMetadataStore zookeeperMetadataStore(CuratorFrameworkFactoryBean curatorFrameworkFactoryBean){
-        return new ZookeeperMetadataStore(curatorFrameworkFactoryBean);
+    ZookeeperMetadataStore zookeeperMetadataStore(CuratorFrameworkFactoryBean curatorFrameworkFactoryBean) throws Exception {
+        ZookeeperMetadataStore zookeeperMetadataStore = new ZookeeperMetadataStore(curatorFrameworkFactoryBean.getObject());
+        return zookeeperMetadataStore;
     }
-
-
 
 
 }
