@@ -5,7 +5,7 @@ ADD ./ /tmp/build/
 
 RUN cd /tmp/build && mvn dependency:resolve
 
-RUN cd /tmp/build && mvn -DskipTests=true package \
+RUN cd /tmp/build && mvn -DskipTests=true install \
         #拷贝编译结果到指定目录
         && mv base-integration-test/target/*.jar /app.jar \
         #清理编译痕迹
