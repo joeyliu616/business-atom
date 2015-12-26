@@ -9,7 +9,7 @@ ADD ./ /tmp/build/
 
 RUN cd /tmp/build && mvn -DskipTests=true package \
         #拷贝编译结果到指定目录
-        && mv base-integration-test/target/*.jar /app.jar \
+        && mv base-integration-rest/target/*.jar /app.jar \
         #清理编译痕迹
         && cd / && rm -rf /tmp/build
 
