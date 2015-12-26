@@ -1,11 +1,13 @@
 FROM maven:3.3.3
 
+ADD settings.xml /root/.m2/setting.xml
+
+RUN mvn -v
 MAINTAINER joeyliu616 joeyliu616@live.cn
 ADD ./ /tmp/build/
 
-RUN cd /tmp/build && mvn dependency:resolve
 
-RUN cd /tmp/build && mvn -DskipTests=true install \
+RUN cd /tmp/build && mvn -DskipTests=true package \
         #拷贝编译结果到指定目录
         && mv base-integration-test/target/*.jar /app.jar \
         #清理编译痕迹
