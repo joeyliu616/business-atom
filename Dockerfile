@@ -1,7 +1,5 @@
 FROM maven:3.3.3
 
-ADD settings.xml /root/.m2/setting.xml
-
 RUN mvn -v
 MAINTAINER joeyliu616 joeyliu616@live.cn
 ADD ./ /tmp/build/
