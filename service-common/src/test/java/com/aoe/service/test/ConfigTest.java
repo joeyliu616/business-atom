@@ -1,17 +1,15 @@
 package com.aoe.service.test;
 
 import com.aoe.service.Config;
+import com.aoe.service.mq.consumer.T;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.integration.zookeeper.metadata.ZookeeperMetadataStore;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
-import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
@@ -24,24 +22,21 @@ import javax.jms.Session;
 public class ConfigTest {
 
     @Resource
-    ZookeeperMetadataStore zookeeperMetadataStore;
-
-    @Resource
     JmsTemplate jmsTemplate;
-
-    @Resource
-    Destination destination;
 
     @Test
     public void foo() throws InterruptedException {
-        Assert.notNull(jmsTemplate);
-        Assert.notNull(zookeeperMetadataStore);
-
-        jmsTemplate.send(destination, new MessageCreator() {
+        //ong id, String a, T t
+        jmsTemplate.send("config", new MessageCreator() {
             @Override
             public Message createMessage(Session session) throws JMSException {
                 Message message = session.createMessage();
-                message.setStringProperty("xx", "xx");
+                message.setLongProperty("id", 1L);
+                message.setStringProperty("a", "abc");
+                T t = new T();
+                t.setK1("kk");
+                t.setK2(111L);
+                //message.setObjectProperty("t",t);
                 return message;
             }
         });

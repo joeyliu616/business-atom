@@ -1,4 +1,4 @@
-package com.aoe.service.mq.consumer;
+package com.aoe.service.mq;
 
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.command.ActiveMQQueue;
@@ -16,9 +16,8 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnClass(ActiveMQConnection.class)
 public class DefaultActiveMQQueue {
 
-    @Bean
-    public ActiveMQQueue activeMQQueue(@Value("aoe.application.queue.default") String defaultName){
+    @Bean(name="defaultQueue")
+    public ActiveMQQueue defaultQueue(@Value("aoe.application.queue.default") String defaultName){
         return new ActiveMQQueue(defaultName);
     }
-
 }
