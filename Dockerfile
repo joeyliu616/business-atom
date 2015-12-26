@@ -1,11 +1,11 @@
 FROM maven:3.3.3
 
 MAINTAINER joeyliu616 joeyliu616@live.cn
-ADD pom.xml /tmp/build/
-RUN cd /tmp/build && mvn -q dependency:resolve
+ADD ./ /tmp/build/
 
-ADD src /tmp/build/*
-RUN cd /tmp/build && mvn -q -DskipTests=true package \
+RUN cd /tmp/build && mvn dependency:resolve
+
+RUN cd /tmp/build && mvn -DskipTests=true package \
         #拷贝编译结果到指定目录
         && mv base-integration-test/target/*.jar /app.jar \
         #清理编译痕迹
