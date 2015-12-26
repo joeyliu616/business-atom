@@ -1,6 +1,5 @@
 FROM maven:3.3.3
 
-MAINTAINER joeyliu616 joeyliu616@live.cn
 ADD pom.xml /tmp/build/
 RUN cd /tmp/build && mvn -q dependency:resolve
 
