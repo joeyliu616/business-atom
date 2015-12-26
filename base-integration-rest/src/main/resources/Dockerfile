@@ -1,13 +1,17 @@
-FROM java:openjdk-7-jdk
+FROM maven:3.3.3
 
 MAINTAINER joeyliu616 joeyliu616@live.cn
+ADD pom.xml /tmp/build/
+RUN cd /tmp/build && mvn -q dependency:resolve
+
+ADD src /tmp/build/src
+RUN cd /tmp/build && mvn -q -DskipTests=true package \
+        #拷贝编译结果到指定目录
+        && mv target/*.jar /app.jar \
+        #清理编译痕迹
+        && cd / && rm -rf /tmp/build
 
 VOLUME /tmp
 
-ADD base-integration-rest-0.0.1-SNAPSHOT.jar app.jar
-RUN bash -c 'touch /app.jar'
-
-#设置环境变量. Spring-boot 启动时加载
-ENV server_port=45852
-
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","-Xmx500m", "-Xms100m", "-XX:+HeapDumpOnOutOfMemoryError", "-XX:HeapDumpPath=/", "/app.jar"]
+EXPOSE 8080
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
