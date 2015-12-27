@@ -2,10 +2,12 @@ package com.aoe.base.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by joey on 15-12-20.
  */
-public class CommonResult {
+public class CommonResult implements Serializable {
     @JsonProperty
     private Integer code = 0;
     //针对开发者的提示

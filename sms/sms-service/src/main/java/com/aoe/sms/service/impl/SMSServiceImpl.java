@@ -39,8 +39,6 @@ public class SMSServiceImpl implements SMSService {
     @Resource
     SMSClient smsClient;
 
-
-
     public String getCode(){
         int i = ThreadLocalRandom.current().nextInt(1000, 9999);
         return Integer.toString(i);
