@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
-import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -16,6 +15,7 @@ public class CacheClient<T extends Serializable> implements RedisOps<T> {
 
     @Resource
     RedisTemplate<String, T> redisTemplate;
+
 
     @Override
     public void delete(String key) {
@@ -73,40 +73,40 @@ public class CacheClient<T extends Serializable> implements RedisOps<T> {
      *
      * @param key
      * @param callable
-     */
+     *//*
     public void onValueExpire(String key, Callable callable) {
-
+        redisTemplate.watch(key);
     }
 
-    /**
+    *//**
      * 当某个key对于的值被改变, 调用callable
      *
      * @param key
      * @param callable
-     */
+     *//*
     public void onValueUpdate(String key, Callable callable) {
 
     }
 
-    /**
+    *//**
      * 当对应的某个key出现. 调用callable
      *
      * @param key
      * @param callable
-     */
+     *//*
     public void onKeyDel(String key, Callable callable) {
 
     }
 
-    /**
+    *//**
      * 当某个key出现, 调用callable
      *
      * @param key
      * @param callable
-     */
+     *//*
     public void onKeySet(String key, Callable callable) {
 
     }
-
+*/
 
 }

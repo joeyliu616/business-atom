@@ -1,7 +1,6 @@
 package com.aoe.service.integration.redis;
 
 import java.io.Serializable;
-import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -43,36 +42,36 @@ public interface RedisOps <T extends Serializable> {
      * @return
      */
     T getEx(String key, Long time, TimeUnit timeUnit);
+/*
 
-
-    /**
+    *//**
      * 当某个key出现, 调用callable
      * @param key
      * @param callable
-     */
+     *//*
     void onKeySet(String key, Callable<Object> callable);
 
 
-    /**
+    *//**
      * 当对应的某个key出现. 调用callable
      * @param key
      * @param callable
-     */
+     *//*
     void onKeyDel(String key, Callable<Object> callable);
 
 
-    /**
+    *//**
      * 当某个key对于的值被改变, 调用callable
      * @param key
      * @param callable
-     */
+     *//*
     void onValueUpdate(String key, Callable<Object> callable);
 
 
-    /**
+    *//**
      * 当某个值过期时, 调用Callable
      * @param key
      * @param callable
-     */
-    void onValueExpire(String key, Callable<Object> callable);
+     *//*
+    void onValueExpire(String key, Callable<Object> callable);*/
 }
