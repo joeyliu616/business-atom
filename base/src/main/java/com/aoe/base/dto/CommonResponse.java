@@ -2,39 +2,36 @@ package com.aoe.base.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by joey on 15-12-18.
  * 通用Dto
  */
-public class CommonResponse<T> {
+public class CommonResponse<T extends Serializable> implements Serializable{
+
     @JsonProperty
-    private Integer code = 0;
-    @JsonProperty
-    private String msg = "";
+    CommonResult result = new CommonResult(0,"");
+
     @JsonProperty
     private T data;
 
-    public Integer getCode() {
-        return code;
+    public CommonResult getResult() {
+        return result;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
+    //hack.
+    public CommonResponse<T> setResult(CommonResult result) {
+        this.result = result;
+        return this;
     }
 
     public T getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public CommonResponse<T> setData(T data) {
         this.data = data;
+        return this;
     }
 }

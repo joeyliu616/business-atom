@@ -5,5 +5,5 @@ package com.aoe.sms.client.api;
  */
 public interface SMSClient {
     Boolean send(String mobile, String content);
-    String getSender();
+    String getSP();
 }
