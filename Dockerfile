@@ -1,3 +1,4 @@
+#USE "clean build" check. Ensure that every one can pass compile with out a local maven repository.
 FROM maven:3.3.3
 
 RUN mvn -v
